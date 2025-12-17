@@ -214,43 +214,63 @@ main {
         overflow-y: auto;
         display: flex;
         flex-direction: column;
-        gap: 15px;
+        gap: 24px;
 
         .message-wrapper {
           display: flex;
-          gap: 10px;
+          gap: 8px;
           align-items: flex-start;
 
           &.ai {
-            .message-avatar {
-              width: 32px;
-              height: 32px;
-              border-radius: 50%;
-              background-color: #4169e1;
-              flex-shrink: 0;
-            }
-
-            .message-time {
-              font-size: 12px;
-              color: #999;
-              margin-bottom: 5px;
-              display: block;
+            .container {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-start;
+              .flex {
+                gap: 8px;
+                width: 100%;
+                display: flex;
+                align-items: center;
+              }
+              .message-avatar {
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                background-color: #4169e1;
+                flex-shrink: 0;
+              }
+              .message-time {
+                font-size: 12px;
+                color: #999;
+                margin-bottom: 2px;
+                display: block;
+              }
             }
           }
 
           &.user {
-            flex-direction: row-reverse;
-            .message {
-              background-color: #2c2c2c;
-              color: white;
-            }
-            .message-time {
-              text-align: right;
+            justify-content: flex-end;
+            .container {
+              display: flex;
+              flex-direction: column;
+              align-items: flex-end;
+              .message-time {
+                font-size: 12px;
+                color: #999;
+                display: block;
+                text-align: right;
+              }
+              .message {
+                color: white;
+                background-color: #1a1a1a;
+                border-top-right-radius: 5px;
+              }
             }
           }
         }
 
         .message {
+          margin-top: 4px;
           padding: 12px 16px;
           border-radius: 25px;
           max-width: 70%;
@@ -267,12 +287,6 @@ main {
       }
     }
   }
-}
-
-.user-message {
-  background-color: #0084ff;
-  color: white;
-  align-self: flex-end;
 }
 
 @media screen and (max-width: 650px) {
