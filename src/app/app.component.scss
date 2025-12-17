@@ -178,8 +178,17 @@ main {
         cursor: pointer;
         color: white;
 
-        &:hover {
+        &:hover:not(:disabled) {
           background-color: #0056b3;
+        }
+
+        &:disabled {
+          opacity: 0.7;
+          cursor: not-allowed;
+        }
+
+        .spinner {
+          animation: spin 1s linear infinite;
         }
       }
     }
@@ -286,6 +295,15 @@ main {
         }
       }
     }
+  }
+}
+
+@keyframes spin {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
   }
 }
 

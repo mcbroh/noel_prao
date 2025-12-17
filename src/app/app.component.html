@@ -58,11 +58,24 @@
                 </p>
               </div>
             </div>
-            <div class="message-wrapper user">
+            <div
+              *ngFor="let msg of messages"
+              [class]="msg.isAi ? 'message-wrapper ai' : 'message-wrapper user'"
+            >
               <div class="container">
-                <span class="message-time">9:47 pm</span>
-                <p class="message user-message">
-                  Hi Bob! Can you help me track my order?
+                <div *ngIf="msg.isAi" class="flex">
+                  <div class="message-avatar"></div>
+                  <span class="message-time">{{ msg.time }}</span>
+                </div>
+                <span *ngIf="!msg.isAi" class="message-time">{{
+                  msg.time
+                }}</span>
+                <p
+                  [class]="
+                    msg.isAi ? 'message ai-message' : 'message user-message'
+                  "
+                >
+                  {{ msg.text }}
                 </p>
               </div>
             </div>
@@ -70,10 +83,52 @@
         </section>
 
         <footer class="footer">
-          <input type="text" placeholder="Write.." id="user-input" />
-          <button type="button" class="btn-send" (click)="sendMessage()">
-            <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
+          <input
+            type="text"
+            placeholder="Write.."
+            id="user-input"
+            [(ngModel)]="userInput"
+            (keyup.enter)="sendUserMessage()"
+          />
+          <button
+            type="button"
+            class="btn-send"
+            (click)="sendUserMessage()"
+            [disabled]="isLoading"
+          >
+            <svg
+              *ngIf="!isLoading"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
               <path d="M2 21L23 12L2 3V10L17 12L2 14V21Z" fill="currentColor" />
+            </svg>
+            <svg
+              *ngIf="isLoading"
+              class="spinner"
+              width="24"
+              height="24"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle
+                cx="12"
+                cy="12"
+                r="10"
+                stroke="currentColor"
+                stroke-width="3"
+                fill="none"
+                opacity="0.25"
+              />
+              <path
+                d="M12 2a10 10 0 0 1 10 10"
+                stroke="currentColor"
+                stroke-width="3"
+                fill="none"
+                stroke-linecap="round"
+              />
             </svg>
           </button>
         </footer>
